@@ -2,45 +2,29 @@
 
 # Embedded Vision for Real-Time 3D Printing Defect Detection
 
-### Edge AI · Computer Vision · Quantized Deployment · Additive Manufacturing
+### Edge AI · Embedded Vision · Quantized Inference · Additive Manufacturing
 
 <p align="center">
   <img src="assets/results/deployment/results_model_run_on_system.png" width="88%">
 </p>
 
-Lightweight embedded defect detection system for extrusion-based additive manufacturing using:
-YOLO11n, dual-camera monitoring, ROI optimization, segmentation experiments, quantized edge inference, and real-time deployment on embedded AI hardware.
+Lightweight embedded computer vision system for real-time defect detection in extrusion-based additive manufacturing using dual-camera monitoring, quantized deep learning models, ROI optimization, and edge AI deployment.
 
 </div>
 
 <br>
 
-# Overview
+# Research Motivation
 
-| Component | Description |
-|---|---|
-| Detection Model | YOLO11n |
-| Deployment Target | Embedded AI Camera + Raspberry Pi |
-| Target Defects | Stringing · Cracking · Warping |
-| Quantization | PTQ (Post-Training Quantization) |
-| Monitoring Setup | Dual-camera 180° nozzle coverage |
-| Optimization | ROI-based OpenCV preprocessing |
-| Additional Experiments | SAM2 · U-Net · GPTQ · QAT |
-| Printing Context | Multi-axis additive manufacturing |
+Additive manufacturing failures often become visible only after significant material and time have already been wasted.
 
-<br>
+In multi-axis extrusion systems, these failures become even more difficult to monitor because:
+- nozzle movement introduces occlusion
+- thermal conditions continuously change
+- extrusion instability evolves dynamically
+- supportless geometries create unpredictable print behavior
 
-# Why This Project Exists
-
-Multi-axis and supportless additive manufacturing introduces highly unstable print conditions where failures can appear dynamically during extrusion.
-
-Traditional post-process inspection is often too late:
-- wasted material
-- failed prints
-- long manufacturing cycles
-- inconsistent quality
-
-This project explored whether lightweight embedded computer vision systems could perform:
+This project explored whether lightweight embedded vision systems could perform:
 
 <table>
 <tr>
@@ -48,23 +32,27 @@ This project explored whether lightweight embedded computer vision systems could
 
 # Real-Time In-Situ Defect Detection
 
-directly on constrained edge hardware during active printing
+directly during active printing on constrained edge hardware
 
 </td>
 </tr>
 </table>
 
-The work focused specifically on detecting:
-
-| Defect | Description |
-|---|---|
-| Stringing | Unwanted filament strands during travel |
-| Cracking | Structural separation between layers |
-| Warping | Edge lifting caused by thermal deformation |
+The work was conducted as part of a broader multi-axis additive manufacturing research platform focused on supportless printing and intelligent monitoring. :contentReference[oaicite:0]{index=0}
 
 <br>
 
 # Target Defects
+
+The system focused specifically on detecting three major extrusion-related failures:
+
+| Defect | Description |
+|---|---|
+| Stringing | Unwanted filament strands between travel regions |
+| Cracking | Layer separation and structural discontinuities |
+| Warping | Thermal deformation causing edge lifting |
+
+<br>
 
 <p align="center">
   <img src="assets/dataset_samples/sample_5.jpg" width="30%">
@@ -72,50 +60,44 @@ The work focused specifically on detecting:
   <img src="assets/dataset_samples/sample_7.jpg" width="30%">
 </p>
 
-The dataset was intentionally generated using:
-- custom STL geometries
-- extrusion parameter variation
-- unstable print conditions
-- thermal manipulation
-- controlled failure generation
+<br>
 
-to create realistic additive manufacturing defects.
+# Dual-Camera Embedded Monitoring Setup
+
+<p align="center">
+  <img src="assets/camera_setup/labeled_camera_setup.png" width="42%">
+</p>
+
+Two identical AI cameras were mounted approximately 180° apart around the nozzle region to reduce visual occlusion during printing.
+
+The setup enabled:
+- front and rear print visibility
+- improved monitoring coverage
+- reduced blind spots
+- complementary defect validation
+- better observation around the extrusion zone
+
+The cameras alternated using a hardware multiplexer to provide multi-view monitoring while remaining within embedded processing limits. :contentReference[oaicite:1]{index=1}
 
 <br>
 
-# System Pipeline
+# Dataset Generation
 
-<p align="center">
-  <img src="assets/results/deployment/final_model_running_on_camera.png" width="80%">
-</p>
+Unlike standard vision datasets, defect generation in additive manufacturing is highly inconsistent and difficult to reproduce reliably.
 
-| Stage | Function |
+A custom dataset pipeline was developed using:
+
+| Dataset Source | Purpose |
 |---|---|
-| Image Acquisition | Embedded dual-camera capture |
-| ROI Extraction | OpenCV-based preprocessing |
-| Edge Inference | Quantized YOLO11n inference |
-| Localization | Real-time defect detection |
-| Monitoring | Live additive manufacturing inspection |
+| Custom STL models | Artificial defect generation |
+| Thermal manipulation | Warping generation |
+| Extrusion parameter variation | Process instability |
+| Controlled print failures | Real-world defect simulation |
+| Public AM datasets | Additional defect diversity |
+| Manual annotation | Bounding-box supervision |
+| Data augmentation | Generalization improvement |
 
 <br>
-
-# Dual-Camera Monitoring Setup
-
-<p align="center">
-  <img src="assets/camera_setup/labeled_camera_setup.png" width="45%">
-</p>
-
-Two identical AI cameras were positioned approximately 180° apart around the print nozzle to reduce nozzle occlusion and improve monitoring coverage during active printing.
-
-The dual-view setup improved:
-- visibility around the extrusion region
-- defect consistency tracking
-- detection reliability
-- monitoring coverage during long-duration prints
-
-<br>
-
-# Dataset Samples
 
 <p align="center">
   <img src="assets/dataset_samples/sample_1.jpg" width="30%">
@@ -129,117 +111,81 @@ The dual-view setup improved:
   <img src="assets/dataset_samples/sample_6.jpg" width="30%">
 </p>
 
-The dataset combined:
-- custom generated failures
-- manually captured print defects
-- controlled environmental variation
-- augmentation pipelines
-- public additive manufacturing datasets
+The experiments revealed that generating repeatable manufacturing defects through parameter tuning alone was significantly harder than expected.  
+Only stringing defects could be reproduced consistently through slicing modifications, while cracking and warping required additional geometric and thermal manipulation strategies. :contentReference[oaicite:2]{index=2}
 
 <br>
 
-# Detection Results
+# Embedded Detection Pipeline
 
 <p align="center">
-  <img src="assets/results/deployment/results_model_run_on_system.png" width="75%">
+  <img src="assets/results/deployment/final_model_running_on_camera.png" width="82%">
 </p>
 
-Real-time YOLO11n inference successfully detected:
-- warping
-- stringing
-- cracking
-
-during active additive manufacturing.
-
-The lightweight deployment pipeline maintained stable inference while operating under constrained embedded hardware conditions.
-
-<br>
-
-# Embedded Deployment
-
-<p align="center">
-  <img src="assets/results/deployment/results_on_rpi.png" width="75%">
-</p>
-
-| Deployment Feature | Result |
+| Pipeline Stage | Function |
 |---|---|
-| Inference Speed | 15–20 FPS |
-| Resolution | 720×1080 |
-| Deployment Type | Quantized Edge Inference |
-| Preprocessing | ROI-based OpenCV pipeline |
-| Hardware | Embedded AI Camera + Raspberry Pi |
+| Dual Camera Capture | Embedded image acquisition |
+| ROI Extraction | OpenCV preprocessing |
+| Quantized Inference | Edge AI execution |
+| Defect Localization | Real-time detection |
+| Live Monitoring | Active manufacturing inspection |
 
 <br>
 
-# ROI Optimization
+# Detection Model Selection
 
-A major engineering challenge involved reducing computational load during embedded inference.
-
-Initial hardware ROI approaches produced unstable inference behavior.
-
-To solve this, a software ROI preprocessing pipeline was implemented using OpenCV before inference execution.
-
-<table>
-<tr>
-<td>
-
-### ROI Pipeline Improvements
-
-- Reduced background interference
-- Improved detection stability
-- Reduced false positives
-- Improved real-time throughput
-- Lower embedded compute overhead
-
-</td>
-</tr>
-</table>
-
-<br>
-
-# Model Exploration
+Several lightweight architectures were evaluated for embedded deployment compatibility.
 
 | Category | Models Explored |
 |---|---|
-| Detection | YOLO11n · YOLOv9 · DETR |
+| Detection | YOLO11n · YOLOv8n · DETR |
 | Lightweight CNNs | MobileNetV3 · EfficientNet |
-| Segmentation | U-Net · SAM2 |
+| Segmentation | U-Net · SAM |
 | Optimization | PTQ · GPTQ · QAT |
 
-Several lightweight architectures were explored before final deployment selection.
-
-YOLO11n provided the best balance between:
+The primary challenge involved balancing:
 - inference speed
-- deployment stability
-- model size
-- embedded compatibility
+- memory usage
+- deployment compatibility
+- detection accuracy
 - real-time performance
+
+YOLO11n was ultimately selected because it achieved the best tradeoff between:
+- stable deployment
+- embedded compatibility
+- compact model size
+- real-time inference
+- defect detection accuracy
+
+The final deployment package remained approximately ~6 MB after optimization and quantization, allowing successful embedded deployment within hardware limits. :contentReference[oaicite:3]{index=3}
 
 <br>
 
 # Quantization and Model Conversion
 
-A significant portion of the project involved converting standard deep learning models into formats compatible with constrained embedded AI hardware.
+A major portion of the research involved converting standard deep learning models into deployable embedded inference pipelines.
 
-The workflow included:
-- ONNX export
-- model optimization
-- quantization
-- embedded compilation
-- deployment packaging
-- edge validation
+The deployment workflow included:
+
+| Stage | Description |
+|---|---|
+| ONNX Export | Cross-platform conversion |
+| Quantization | Reduced memory footprint |
+| Optimization | Embedded inference tuning |
+| Packaging | Edge deployment generation |
+| Validation | Hardware-side testing |
 
 <br>
 
-| Quantization Technique | Status |
+Multiple quantization strategies were explored:
+
+| Technique | Status |
 |---|---|
-| PTQ | Final Deployment |
+| PTQ (Post-Training Quantization) | Final Deployment |
 | GPTQ | Experimental |
 | QAT | Experimental |
 
 <br>
-
-Final deployment used:
 
 <table>
 <tr>
@@ -247,45 +193,138 @@ Final deployment used:
 
 # PTQ (Post-Training Quantization)
 
-because it provided the best balance between:
-deployment simplicity, model stability, accuracy retention, and embedded compatibility.
+was finalized because it provided the best balance between:
+model stability, deployment simplicity, accuracy retention, and embedded compatibility.
 
 </td>
 </tr>
 </table>
 
-The final optimized deployment package remained approximately:
+<br>
 
-# ~6 MB
+# ROI-Based Optimization
 
-which enabled successful deployment on embedded AI hardware.
+One of the largest deployment challenges involved reducing inference overhead on constrained embedded hardware.
+
+Initial hardware ROI attempts produced unstable detection behavior and inconsistent bounding-box generation.
+
+To overcome this, a software-based ROI preprocessing pipeline was implemented using OpenCV before inference execution. :contentReference[oaicite:4]{index=4}
 
 <br>
 
-# Segmentation Experiments
+| ROI Optimization Benefits |
+|---|
+| Reduced background interference |
+| Lower computational overhead |
+| Improved real-time stability |
+| Reduced false positives |
+| Better embedded throughput |
+
+<br>
+
+# Segmentation Research
+
+The project also explored segmentation-based pipelines for:
+- pixel-level defect localization
+- foreground isolation
+- geometry-aware monitoring
+- print-region extraction
+
+<br>
+
+## SAM-Based Segmentation Experiments
 
 <p align="center">
-  <img src="assets/results/segmentation/sam_on_rpi_segmented.png" width="30%">
   <img src="assets/results/segmentation/sam_on_system_result_1.png" width="30%">
   <img src="assets/results/segmentation/sam_on_system_result_2.png" width="30%">
 </p>
 
 <p align="center">
-  <img src="assets/results/segmentation/sam_on_system_result_3.png" width="30%">
   <img src="assets/results/segmentation/sam_on_rpi_original_before_segmented.png" width="30%">
+  <img src="assets/results/segmentation/sam_on_rpi_segmented.png" width="30%">
 </p>
 
-Segmentation-based pipelines were explored for:
-- foreground isolation
-- pixel-level defect localization
-- geometry-aware inspection
-- defect region extraction
+SAM-based segmentation produced strong visual isolation quality but proved too computationally expensive for stable embedded deployment.
 
-Although segmentation quality was promising, deployment proved impractical because of:
-- embedded memory constraints
+The primary issues included:
+- memory limitations
+- unstable multi-model execution
+- segmentation overhead
 - quantization degradation
-- unstable multi-model inference
-- segmentation overhead on constrained hardware
+- deployment instability
+
+<br>
+
+## Lightweight U-Net Segmentation
+
+To reduce segmentation overhead, a lightweight attention-based U-Net architecture was explored.
+
+<p align="center">
+  <img src="assets/model_architecture/U-Net with attention architecture.png" width="78%">
+</p>
+
+The architecture used:
+- encoder-decoder segmentation
+- attention blocks
+- lightweight skip connections
+- embedded-oriented feature extraction
+
+to improve deployment feasibility under constrained hardware conditions. :contentReference[oaicite:5]{index=5}
+
+<br>
+
+## Combined Segmentation + Detection Pipeline
+
+A combined segmentation-detection pipeline was also explored.
+
+<p align="center">
+  <img src="assets/model_architecture/combined segmentation-detection model and the object.png" width="88%">
+</p>
+
+The idea was:
+1. segment the print object
+2. isolate foreground regions
+3. perform detection only inside segmented regions
+
+This significantly improved visual focus during experimentation.
+
+However, the integrated pipeline exceeded embedded deployment constraints even after:
+- quantization
+- pruning
+- optimization attempts
+
+These experiments highlighted the practical limitations of deploying multiple deep learning pipelines simultaneously on constrained edge hardware. :contentReference[oaicite:6]{index=6}
+
+<br>
+
+# Detection Results
+
+<p align="center">
+  <img src="assets/results/deployment/results_model_run_on_system.png" width="78%">
+</p>
+
+The deployed system successfully detected:
+- cracking
+- stringing
+- warping
+
+during active printing with stable real-time inference.
+
+<br>
+
+# Embedded Deployment Results
+
+<p align="center">
+  <img src="assets/results/deployment/results_on_rpi.png" width="78%">
+</p>
+
+| Deployment Metric | Result |
+|---|---|
+| Inference Speed | 15–20 FPS |
+| Resolution | 720×1080 |
+| Deployment Mode | Quantized Edge Inference |
+| Preprocessing | ROI-based OpenCV |
+| Runtime System | Raspberry Pi + AI Camera |
 
 <br>
 
@@ -295,10 +334,6 @@ Although segmentation quality was promising, deployment proved impractical becau
   <img src="assets/results/training/yolo_training_plots.png" width="88%">
 </p>
 
-Training converged consistently with stable validation behavior across all defect classes.
-
-<br>
-
 | Metric | Value |
 |---|---|
 | Precision | 0.785 |
@@ -306,59 +341,56 @@ Training converged consistently with stable validation behavior across all defec
 | mAP@0.5 | 0.888 |
 | mAP@0.5:0.95 | 0.476 |
 
+The model achieved stable convergence and maintained reliable detection performance across all three defect classes. :contentReference[oaicite:7]{index=7}
+
 <br>
 
 # Real-Time Corrective Feedback Experiments
 
-The project also explored whether detected defects could be corrected automatically during active printing using adaptive ML-based feedback systems.
+Beyond defect detection, the project also explored adaptive feedback systems intended to modify printing behavior dynamically during active manufacturing.
 
-The objective was to dynamically modify:
-- print speed
+The objective was to automatically adjust:
 - extrusion behavior
-- feed rate
+- print speed
 - thermal conditions
+- feed rate
+- material flow
 
 after defect detection.
 
-However, autonomous correction proved unreliable because of:
-- unstable material behavior
-- environmental variability
-- thermal fluctuations
+However, closed-loop correction proved unreliable because of:
+- thermal instability
+- environmental fluctuations
 - inconsistent extrusion dynamics
 - nozzle contamination
-- unpredictable defect progression
+- unpredictable defect evolution
+- real-world material variability
 
-Although the closed-loop correction pipeline was unsuccessful, the experiments provided valuable insights into the limitations of adaptive embedded manufacturing systems.
+Although the adaptive correction pipeline was ultimately unsuccessful, these experiments provided valuable insight into the limitations of intelligent closed-loop additive manufacturing systems.
 
 <br>
 
-# Engineering Challenges
+# Key Engineering Challenges
 
-<table>
-<tr>
-<td>
+| Challenge | Impact |
+|---|---|
+| Embedded memory limits | Restricted model complexity |
+| Multi-model deployment | Segmentation infeasibility |
+| Quantization degradation | Accuracy reduction |
+| Nozzle occlusion | Reduced visibility |
+| Environmental variability | Unstable defect behavior |
+| Dual-camera synchronization | Embedded timing overhead |
+| Real-time constraints | Deployment optimization complexity |
 
-### Major Challenges Encountered
+<br>
 
-- Embedded memory limitations
-- Segmentation deployment instability
-- Quantization accuracy degradation
-- Real-time inference constraints
-- Environmental variability during printing
-- Nozzle occlusion
-- Multi-camera synchronization
-- Hardware deployment restrictions
-- Adaptive feedback instability
+This repository intentionally documents:
+- successful deployments
+- failed experiments
+- deployment limitations
+- engineering tradeoffs
 
-</td>
-</tr>
-</table>
-
-This repository intentionally documents both:
-- successful deployment pipelines
-- failed experimental approaches
-
-because both were critical to the engineering and research process.
+because all of them were critical to the research process.
 
 <br>
 
@@ -370,6 +402,7 @@ embedded-vision-3d-print-monitoring/
 ├── assets/
 │   ├── camera_setup/
 │   ├── dataset_samples/
+│   ├── model_architecture/
 │   └── results/
 │       ├── deployment/
 │       ├── segmentation/
@@ -387,13 +420,13 @@ embedded-vision-3d-print-monitoring/
 
 # Future Work
 
-| Direction | Goal |
+| Research Direction | Objective |
 |---|---|
-| Multi-model edge deployment | Simultaneous detection + segmentation |
-| Temporal tracking | Defect progression analysis |
-| Lightweight segmentation | Embedded deployment feasibility |
+| Multi-model edge deployment | Detection + segmentation simultaneously |
+| Temporal defect tracking | Analyze defect progression |
+| Embedded segmentation | Lightweight pixel-level inference |
 | Multi-view fusion | Improved nozzle visibility |
-| Autonomous correction | Real-time adaptive printing |
+| Closed-loop correction | Real-time adaptive manufacturing |
 | Hardware acceleration | Higher FPS and lower latency |
 
 <br>
@@ -408,5 +441,5 @@ embedded-vision-3d-print-monitoring/
 | U-Net Segmentation | Ronneberger et al. |
 | Segment Anything | Kirillov et al. |
 | YOLO Architectures | Redmon et al. |
-| MobileNetV3 | Howard et al. |
 | DETR | Carion et al. |
+| MobileNetV3 | Howard et al. |
