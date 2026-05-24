@@ -38,7 +38,7 @@ directly during active printing on constrained edge hardware
 </tr>
 </table>
 
-The work was conducted as part of a broader multi-axis additive manufacturing research platform focused on supportless printing and intelligent monitoring. 
+The work was conducted as part of a broader multi-axis additive manufacturing research platform focused on supportless printing and intelligent monitoring.
 
 <br>
 
@@ -77,7 +77,7 @@ The setup enabled:
 - complementary defect validation
 - better observation around the extrusion zone
 
-The cameras alternated using a hardware multiplexer to provide multi-view monitoring while remaining within embedded processing limits. 
+The cameras alternated using a hardware multiplexer to provide multi-view monitoring while remaining within embedded processing limits.
 
 <br>
 
@@ -111,8 +111,9 @@ A custom dataset pipeline was developed using:
   <img src="assets/dataset_samples/sample_6.jpg" width="30%">
 </p>
 
-The experiments revealed that generating repeatable manufacturing defects through parameter tuning alone was significantly harder than expected.  
-Only stringing defects could be reproduced consistently through slicing modifications, while cracking and warping required additional geometric and thermal manipulation strategies. 
+The experiments revealed that generating repeatable manufacturing defects through parameter tuning alone was significantly harder than expected.
+
+Only stringing defects could be reproduced consistently through slicing modifications, while cracking and warping required additional geometric and thermal manipulation strategies.
 
 <br>
 
@@ -157,7 +158,7 @@ YOLO11n was ultimately selected because it achieved the best tradeoff between:
 - real-time inference
 - defect detection accuracy
 
-The final deployment package remained approximately ~6 MB after optimization and quantization, allowing successful embedded deployment within hardware limits. 
+The final deployment package remained approximately ~6 MB after optimization and quantization, allowing successful embedded deployment within hardware limits.
 
 <br>
 
@@ -208,7 +209,7 @@ One of the largest deployment challenges involved reducing inference overhead on
 
 Initial hardware ROI attempts produced unstable detection behavior and inconsistent bounding-box generation.
 
-To overcome this, a software-based ROI preprocessing pipeline was implemented using OpenCV before inference execution. 
+To overcome this, a software-based ROI preprocessing pipeline was implemented using OpenCV before inference execution.
 
 <br>
 
@@ -232,7 +233,25 @@ The project also explored segmentation-based pipelines for:
 
 <br>
 
-## U-Net Segmentation Experiments
+## Lightweight U-Net Segmentation
+
+To reduce segmentation overhead, a lightweight attention-based U-Net architecture was explored.
+
+<p align="center">
+  <img src="assets/model_architecture/U-Net with attention architecture.png" width="78%">
+</p>
+
+The architecture used:
+- encoder-decoder segmentation
+- attention blocks
+- lightweight skip connections
+- embedded-oriented feature extraction
+
+to improve deployment feasibility under constrained hardware conditions.
+
+<br>
+
+## U-Net Segmentation Results on Embedded System
 
 <p align="center">
   <img src="assets/results/segmentation/sam_on_system_result_1.png" width="30%">
@@ -252,25 +271,12 @@ The segmentation pipeline enabled:
 - geometry-aware monitoring
 - reduced background interference
 
-However, segmentation still introduced additional computational overhead during real-time embedded deployment, requiring careful optimization for stable operation.
+The optimized U-Net pipeline was successfully executed on Raspberry Pi hardware after:
+- quantization
+- model optimization
+- lightweight architectural tuning
 
-<br>
-
-## Lightweight U-Net Segmentation
-
-To reduce segmentation overhead, a lightweight attention-based U-Net architecture was explored.
-
-<p align="center">
-  <img src="assets/model_architecture/U-Net with attention architecture.png" width="78%">
-</p>
-
-The architecture used:
-- encoder-decoder segmentation
-- attention blocks
-- lightweight skip connections
-- embedded-oriented feature extraction
-
-to improve deployment feasibility under constrained hardware conditions. 
+However, segmentation still introduced additional computational overhead during long-duration real-time deployment, requiring careful optimization for stable operation.
 
 <br>
 
@@ -300,7 +306,7 @@ Although feasible, the combined system still introduced additional:
 - scheduling complexity
 - thermal load
 
-These experiments highlighted both the feasibility and practical limitations of simultaneous multi-model deployment on constrained edge hardware. 
+These experiments highlighted both the feasibility and practical limitations of simultaneous multi-model deployment on constrained edge hardware.
 
 <br>
 
@@ -348,7 +354,7 @@ during active printing with stable real-time inference.
 | mAP@0.5 | 0.888 |
 | mAP@0.5:0.95 | 0.476 |
 
-The model achieved stable convergence and maintained reliable detection performance across all three defect classes. 
+The model achieved stable convergence and maintained reliable detection performance across all three defect classes.
 
 <br>
 
@@ -421,6 +427,7 @@ embedded-vision-3d-print-monitoring/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
+```
 
 <br>
 
@@ -429,10 +436,11 @@ embedded-vision-3d-print-monitoring/
 | Research Direction | Objective |
 |---|---|
 | Temporal defect tracking | Analyze defect progression |
-| Embedded segmentation | Lightweight pixel-level inference |
+| Embedded segmentation optimization | Lightweight pixel-level inference |
 | Multi-view fusion | Improved nozzle visibility |
 | Closed-loop correction | Real-time adaptive manufacturing |
 | Hardware acceleration | Higher FPS and lower latency |
+| Autonomous defect analytics | Predictive manufacturing monitoring |
 
 <br>
 
