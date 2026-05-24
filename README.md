@@ -38,7 +38,7 @@ directly during active printing on constrained edge hardware
 </tr>
 </table>
 
-The work was conducted as part of a broader multi-axis additive manufacturing research platform focused on supportless printing and intelligent monitoring. :contentReference[oaicite:0]{index=0}
+The work was conducted as part of a broader multi-axis additive manufacturing research platform focused on supportless printing and intelligent monitoring. 
 
 <br>
 
@@ -77,7 +77,7 @@ The setup enabled:
 - complementary defect validation
 - better observation around the extrusion zone
 
-The cameras alternated using a hardware multiplexer to provide multi-view monitoring while remaining within embedded processing limits. :contentReference[oaicite:1]{index=1}
+The cameras alternated using a hardware multiplexer to provide multi-view monitoring while remaining within embedded processing limits. 
 
 <br>
 
@@ -112,7 +112,7 @@ A custom dataset pipeline was developed using:
 </p>
 
 The experiments revealed that generating repeatable manufacturing defects through parameter tuning alone was significantly harder than expected.  
-Only stringing defects could be reproduced consistently through slicing modifications, while cracking and warping required additional geometric and thermal manipulation strategies. :contentReference[oaicite:2]{index=2}
+Only stringing defects could be reproduced consistently through slicing modifications, while cracking and warping required additional geometric and thermal manipulation strategies. 
 
 <br>
 
@@ -157,7 +157,7 @@ YOLO11n was ultimately selected because it achieved the best tradeoff between:
 - real-time inference
 - defect detection accuracy
 
-The final deployment package remained approximately ~6 MB after optimization and quantization, allowing successful embedded deployment within hardware limits. :contentReference[oaicite:3]{index=3}
+The final deployment package remained approximately ~6 MB after optimization and quantization, allowing successful embedded deployment within hardware limits. 
 
 <br>
 
@@ -208,7 +208,7 @@ One of the largest deployment challenges involved reducing inference overhead on
 
 Initial hardware ROI attempts produced unstable detection behavior and inconsistent bounding-box generation.
 
-To overcome this, a software-based ROI preprocessing pipeline was implemented using OpenCV before inference execution. :contentReference[oaicite:4]{index=4}
+To overcome this, a software-based ROI preprocessing pipeline was implemented using OpenCV before inference execution. 
 
 <br>
 
@@ -269,7 +269,7 @@ The architecture used:
 - lightweight skip connections
 - embedded-oriented feature extraction
 
-to improve deployment feasibility under constrained hardware conditions. :contentReference[oaicite:5]{index=5}
+to improve deployment feasibility under constrained hardware conditions. 
 
 <br>
 
@@ -293,7 +293,7 @@ However, the integrated pipeline exceeded embedded deployment constraints even a
 - pruning
 - optimization attempts
 
-These experiments highlighted the practical limitations of deploying multiple deep learning pipelines simultaneously on constrained edge hardware. :contentReference[oaicite:6]{index=6}
+These experiments highlighted the practical limitations of deploying multiple deep learning pipelines simultaneously on constrained edge hardware. 
 
 <br>
 
@@ -341,7 +341,7 @@ during active printing with stable real-time inference.
 | mAP@0.5 | 0.888 |
 | mAP@0.5:0.95 | 0.476 |
 
-The model achieved stable convergence and maintained reliable detection performance across all three defect classes. :contentReference[oaicite:7]{index=7}
+The model achieved stable convergence and maintained reliable detection performance across all three defect classes. 
 
 <br>
 
