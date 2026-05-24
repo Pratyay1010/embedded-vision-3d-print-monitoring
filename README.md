@@ -232,7 +232,7 @@ The project also explored segmentation-based pipelines for:
 
 <br>
 
-## SAM-Based Segmentation Experiments
+## U-Net Segmentation Experiments
 
 <p align="center">
   <img src="assets/results/segmentation/sam_on_system_result_1.png" width="30%">
@@ -244,14 +244,15 @@ The project also explored segmentation-based pipelines for:
   <img src="assets/results/segmentation/sam_on_rpi_segmented.png" width="30%">
 </p>
 
-SAM-based segmentation produced strong visual isolation quality but proved too computationally expensive for stable embedded deployment.
+Lightweight U-Net-based segmentation produced strong foreground isolation quality and improved print-region focus during embedded experimentation.
 
-The primary issues included:
-- memory limitations
-- unstable multi-model execution
-- segmentation overhead
-- quantization degradation
-- deployment instability
+The segmentation pipeline enabled:
+- foreground isolation
+- print-region extraction
+- geometry-aware monitoring
+- reduced background interference
+
+However, segmentation still introduced additional computational overhead during real-time embedded deployment, requiring careful optimization for stable operation.
 
 <br>
 
@@ -288,12 +289,18 @@ The idea was:
 
 This significantly improved visual focus during experimentation.
 
-However, the integrated pipeline exceeded embedded deployment constraints even after:
+The integrated pipeline was successfully deployed using simultaneous lightweight segmentation and detection models on embedded hardware after:
 - quantization
 - pruning
 - optimization attempts
 
-These experiments highlighted the practical limitations of deploying multiple deep learning pipelines simultaneously on constrained edge hardware. 
+Although feasible, the combined system still introduced additional:
+- memory overhead
+- inference latency
+- scheduling complexity
+- thermal load
+
+These experiments highlighted both the feasibility and practical limitations of simultaneous multi-model deployment on constrained edge hardware. 
 
 <br>
 
@@ -375,7 +382,7 @@ Although the adaptive correction pipeline was ultimately unsuccessful, these exp
 | Challenge | Impact |
 |---|---|
 | Embedded memory limits | Restricted model complexity |
-| Multi-model deployment | Segmentation infeasibility |
+| Multi-model deployment | Increased inference complexity |
 | Quantization degradation | Accuracy reduction |
 | Nozzle occlusion | Reduced visibility |
 | Environmental variability | Unstable defect behavior |
@@ -414,7 +421,6 @@ embedded-vision-3d-print-monitoring/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
-```
 
 <br>
 
@@ -422,7 +428,6 @@ embedded-vision-3d-print-monitoring/
 
 | Research Direction | Objective |
 |---|---|
-| Multi-model edge deployment | Detection + segmentation simultaneously |
 | Temporal defect tracking | Analyze defect progression |
 | Embedded segmentation | Lightweight pixel-level inference |
 | Multi-view fusion | Improved nozzle visibility |
