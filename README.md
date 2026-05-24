@@ -141,7 +141,7 @@ Several lightweight architectures were evaluated for embedded deployment compati
 |---|---|
 | Detection | YOLO11n · YOLOv8n · DETR |
 | Lightweight CNNs | MobileNetV3 · EfficientNet |
-| Segmentation | U-Net · SAM |
+| Segmentation | U-Net · SAM2 |
 | Optimization | PTQ · GPTQ · QAT |
 
 The primary challenge involved balancing:
@@ -233,23 +233,23 @@ The project also explored segmentation-based pipelines for:
 
 <br>
 
-## SAM-Based Segmentation Experiments
+## SAM2-Based Segmentation Experiments
 
 <p align="center">
   <img src="assets/results/segmentation/sam_on_system_result_1.png" width="30%">
   <img src="assets/results/segmentation/sam_on_system_result_2.png" width="30%">
 </p>
 
-SAM-based segmentation produced strong visual isolation quality during experimentation.
+SAM2-based segmentation produced strong visual isolation quality during experimentation.
 
-However, SAM proved too computationally expensive for stable embedded deployment because of:
+However, SAM2 proved too computationally expensive for stable embedded deployment because of:
 - extremely high memory usage
 - heavy model weights
 - unstable inference performance
 - embedded thermal limitations
 - multi-model deployment overhead
 
-As a result, SAM could not be deployed reliably on Raspberry Pi hardware for real-time inference.
+As a result, SAM2 could not be deployed reliably on Raspberry Pi hardware for real-time inference.
 
 <br>
 
@@ -468,7 +468,7 @@ embedded-vision-3d-print-monitoring/
 | In-Situ Defect Detection | An et al. |
 | Closed-Loop Monitoring | Liu et al. |
 | U-Net Segmentation | Ronneberger et al. |
-| Segment Anything | Kirillov et al. |
+| Segment Anything 2 | Ravi et al. |
 | YOLO Architectures | Redmon et al. |
 | DETR | Carion et al. |
 | MobileNetV3 | Howard et al. |
