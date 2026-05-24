@@ -233,6 +233,26 @@ The project also explored segmentation-based pipelines for:
 
 <br>
 
+## SAM-Based Segmentation Experiments
+
+<p align="center">
+  <img src="assets/results/segmentation/sam_on_system_result_1.png" width="30%">
+  <img src="assets/results/segmentation/sam_on_system_result_2.png" width="30%">
+</p>
+
+SAM-based segmentation produced strong visual isolation quality during experimentation.
+
+However, SAM proved too computationally expensive for stable embedded deployment because of:
+- extremely high memory usage
+- heavy model weights
+- unstable inference performance
+- embedded thermal limitations
+- multi-model deployment overhead
+
+As a result, SAM could not be deployed reliably on Raspberry Pi hardware for real-time inference.
+
+<br>
+
 ## Lightweight U-Net Segmentation
 
 To reduce segmentation overhead, a lightweight attention-based U-Net architecture was explored.
@@ -251,19 +271,14 @@ to improve deployment feasibility under constrained hardware conditions.
 
 <br>
 
-## U-Net Segmentation Results on Embedded System
-
-<p align="center">
-  <img src="assets/results/segmentation/sam_on_system_result_1.png" width="30%">
-  <img src="assets/results/segmentation/sam_on_system_result_2.png" width="30%">
-</p>
+## U-Net Segmentation Results on Raspberry Pi
 
 <p align="center">
   <img src="assets/results/segmentation/sam_on_rpi_original_before_segmented.png" width="30%">
   <img src="assets/results/segmentation/sam_on_rpi_segmented.png" width="30%">
 </p>
 
-Lightweight U-Net-based segmentation produced strong foreground isolation quality and improved print-region focus during embedded experimentation.
+The optimized lightweight U-Net pipeline was successfully deployed and executed on Raspberry Pi hardware.
 
 The segmentation pipeline enabled:
 - foreground isolation
@@ -271,12 +286,13 @@ The segmentation pipeline enabled:
 - geometry-aware monitoring
 - reduced background interference
 
-The optimized U-Net pipeline was successfully executed on Raspberry Pi hardware after:
+The optimized deployment required:
+- lightweight architecture tuning
 - quantization
-- model optimization
-- lightweight architectural tuning
+- embedded inference optimization
+- preprocessing improvements
 
-However, segmentation still introduced additional computational overhead during long-duration real-time deployment, requiring careful optimization for stable operation.
+Although feasible, segmentation still introduced additional computational overhead during long-duration real-time deployment.
 
 <br>
 
