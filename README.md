@@ -65,7 +65,7 @@ The system focused specifically on detecting three major extrusion-related failu
 # Dual-Camera Embedded Monitoring Setup
 
 <p align="center">
-  <img src="assets/camera_setup/camera_setup" width="42%">
+  <img src="assets/camera_setup/camera_setup.png" width="42%">
 </p>
 
 Two identical AI cameras were mounted approximately 180° apart around the nozzle region to reduce visual occlusion during printing.
