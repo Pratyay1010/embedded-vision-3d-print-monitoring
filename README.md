@@ -65,7 +65,7 @@ The system focused specifically on detecting three major extrusion-related failu
 # Dual-Camera Embedded Monitoring Setup
 
 <p align="center">
-  <img src="assets/camera_setup/labeled_camera_setup.png" width="42%">
+  <img src="assets/camera_setup/camera_setup" width="42%">
 </p>
 
 Two identical AI cameras were mounted approximately 180° apart around the nozzle region to reduce visual occlusion during printing.
@@ -278,7 +278,7 @@ to improve deployment feasibility under constrained hardware conditions. :conten
 A combined segmentation-detection pipeline was also explored.
 
 <p align="center">
-  <img src="assets/model_architecture/combined segmentation-detection model and the object.png" width="88%">
+  <img src="assets/model_architecture/combined_segmentation_detection_model.png" width="88%">
 </p>
 
 The idea was:
