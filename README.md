@@ -454,7 +454,7 @@ embedded-vision-3d-print-monitoring/
 | Temporal defect tracking | Analyze defect progression |
 | Embedded segmentation optimization | Lightweight pixel-level inference |
 | Multi-view fusion | Improved nozzle visibility |
-| Closed-loop correction | Real-time adaptive manufacturing |
+| Closed-loop correction | Real-time adjustment of bed temperature, fan speed, extrusion flow, feed rate, and multi-axis motion behavior using embedded defect detection feedback |
 | Hardware acceleration | Higher FPS and lower latency |
 | Autonomous defect analytics | Predictive manufacturing monitoring |
 
